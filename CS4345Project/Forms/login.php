@@ -1,10 +1,8 @@
 <?php
-session_start();
+	session_start();
+	$_SESSION['pageTitle'] = 'Login';
+	include '../header.php';
 ?>
-<html>
-	<head>
-		<title>PHPRO Login</title>
-	</head> 
 	<body>
 		<h2>Login Here</h2>
 		<form action="login_submit.php" method="post">
@@ -21,5 +19,6 @@ session_start();
 				</p> 
 			</fieldset>
 		</form> 
-	</body> 
-</html>
+<?php 
+	include '../footer.php';
+?>

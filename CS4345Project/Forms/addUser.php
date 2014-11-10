@@ -1,13 +1,14 @@
 <?php
 
-/*** begin our session ***/
-session_start();
+	session_start();
+	$_SESSION['pageTitle'] = 'Add a user';
+	include '../header.php';
 
-/*** set a form token ***/
-$form_token = md5( uniqid('auth', true) );
-
-/*** set the session form token ***/
-$_SESSION['form_token'] = $form_token;
+	/*** set a form token ***/
+	$form_token = md5( uniqid('auth', true) );
+	
+	/*** set the session form token ***/
+	$_SESSION['form_token'] = $form_token;
 ?>
 
 <html>
@@ -37,5 +38,6 @@ $_SESSION['form_token'] = $form_token;
 			</p>
 			</fieldset>
 		</form>
-	</body>
-</html>
+<?php 
+	include '../footer.php';
+?>

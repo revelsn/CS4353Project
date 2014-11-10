@@ -1,7 +1,9 @@
 <?php
 	/*** begin our session ***/
 	session_start();
-	
+	$_SESSION['pageTitle'] = 'Add a user';
+	include "../db_conn.php";
+	include '../header.php';
 	/*** first check that both the username, password and form token have been sent ***/
 	if(!isset( $_POST['username'], $_POST['password'], $_POST['form_token']))
 	{
@@ -32,7 +34,7 @@
 		/*** now we can encrypt the password ***/
 		$passwdHash = password_hash($password, PASSWORD_DEFAULT);
 	
-		include_once 'db_conn.php';
+		
 	
 		try
 		{
@@ -66,14 +68,13 @@
 				$message = 'We are unable to process your request. Please try again later"';
 			}
 		}
+		$db = null;
 	}
 ?>
-
-<html>
-<head>
-<title>PHPRO Login</title>
-</head>
 <body>
-<p><?php echo $message; ?>
-</body>
-</html>
+	<p><?php echo $message; ?><br />
+		<a href='../index.php'>Go back to home page</a>
+	</p>
+<?php 
+	include '../footer.php';
+?>

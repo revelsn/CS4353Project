@@ -1,7 +1,9 @@
 <?php
-/*** begin our session ***/
 session_start();
+$_SESSION['pageTitle'] = 'Login';
 include "../db_conn.php";
+include '../header.php';
+
 error_reporting(E_ALL);
 /*** check if the users is already logged in ***/
 if(isset( $_SESSION['user_id'] ))
@@ -66,15 +68,14 @@ else
 		print_r($e);
 		$message = 'We are unable to process your request. Please try again later';
 	}
+	$db = null;
 }
 ?>
 
-<html>
-<head>
-<title>PHPRO Login</title>
-</head>
-<body>
-<p><?php echo $message; ?>
-<a href='../index.php'>Index</a>
-</body>
-</html>
+	<body>
+		<p><?php echo $message; ?><br />
+			<a href='../index.php'>Go back to home page</a>
+		</p>
+<?php 
+	include '../footer.php';
+?>

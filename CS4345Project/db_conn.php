@@ -14,8 +14,6 @@ $dbpassword = 'root';
 try {
     $db = new PDO("mysql:host=$dbhostname;dbname=$dbname", $dbusername, $dbpassword);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    /*** echo a message saying we have connected ***/
-    echo 'Connected to database';
     }
 catch(PDOException $e)
     {
