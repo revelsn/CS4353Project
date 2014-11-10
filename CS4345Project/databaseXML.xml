@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- SQL XML created by WWW SQL Designer, http://code.google.com/p/wwwsqldesigner/ -->
+<!-- Active URL: http://ondras.zarovi.cz/sql/demo/ -->
+<sql>
+<datatypes db="mysql">
+	<group label="Numeric" color="rgb(238,238,170)">
+		<type label="Integer" length="0" sql="INTEGER" quote=""/>
+	 	<type label="TINYINT" length="0" sql="TINYINT" quote=""/>
+	 	<type label="SMALLINT" length="0" sql="SMALLINT" quote=""/>
+	 	<type label="MEDIUMINT" length="0" sql="MEDIUMINT" quote=""/>
+	 	<type label="INT" length="0" sql="INT" quote=""/>
+		<type label="BIGINT" length="0" sql="BIGINT" quote=""/>
+		<type label="Decimal" length="1" sql="DECIMAL" re="DEC" quote=""/>
+		<type label="Single precision" length="0" sql="FLOAT" quote=""/>
+		<type label="Double precision" length="0" sql="DOUBLE" re="DOUBLE" quote=""/>
+	</group>
+
+	<group label="Character" color="rgb(255,200,200)">
+		<type label="Char" length="1" sql="CHAR" quote="'"/>
+		<type label="Varchar" length="1" sql="VARCHAR" quote="'"/>
+		<type label="Text" length="0" sql="MEDIUMTEXT" re="TEXT" quote="'"/>
+		<type label="Binary" length="1" sql="BINARY" quote="'"/>
+		<type label="Varbinary" length="1" sql="VARBINARY" quote="'"/>
+		<type label="BLOB" length="0" sql="BLOB" re="BLOB" quote="'"/>
+	</group>
+
+	<group label="Date &amp; Time" color="rgb(200,255,200)">
+		<type label="Date" length="0" sql="DATE" quote="'"/>
+		<type label="Time" length="0" sql="TIME" quote="'"/>
+		<type label="Datetime" length="0" sql="DATETIME" quote="'"/>
+		<type label="Year" length="0" sql="YEAR" quote=""/>
+		<type label="Timestamp" length="0" sql="TIMESTAMP" quote="'"/>
+	</group>
+	
+	<group label="Miscellaneous" color="rgb(200,200,255)">
+		<type label="ENUM" length="1" sql="ENUM" quote=""/>
+		<type label="SET" length="1" sql="SET" quote=""/>
+		<type label="Bit" length="0" sql="bit" quote=""/>
+	</group>
+</datatypes><table x="10" y="10" name="Employee">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="isAdminUser" null="1" autoincrement="0">
+<datatype>bit(1)</datatype>
+<default>0</default></row>
+<row name="lName" null="0" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>'NULL'</default></row>
+<row name="fName" null="0" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>'NULL'</default></row>
+<row name="locationID" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Location" row="id" />
+</row>
+<row name="dateEmployed" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<row name="psswdHash" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+<default>'NULL'</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="225" y="296" name="Uploads">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="name" null="1" autoincrement="0">
+<datatype>VARCHAR(200)</datatype>
+<default>NULL</default></row>
+<row name="mime" null="0" autoincrement="0">
+<datatype>VARCHAR(50)</datatype>
+<default>'NULL'</default></row>
+<row name="size" null="0" autoincrement="0">
+<datatype>BIGINT</datatype>
+<default>0</default></row>
+<row name="fileData" null="1" autoincrement="0">
+<datatype>BLOB</datatype>
+<default>NULL</default></row>
+<row name="dateCreated" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<row name="transactionID" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Transaction" row="id" />
+</row>
+<row name="description" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>Table for storing uploaded pdfs</comment>
+</table>
+<table x="812" y="196" name="Company">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="companyName" null="0" autoincrement="0">
+<datatype>VARCHAR(100)</datatype>
+<default>'NULL'</default></row>
+<row name="isIndividual" null="0" autoincrement="0">
+<datatype>bit(1)</datatype>
+<default>0</default></row>
+<row name="dateCreated" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="533" y="23" name="PointOfContact">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="companyID" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Company" row="id" />
+</row>
+<row name="fName" null="0" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>'NULL'</default></row>
+<row name="lname" null="0" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>'NULL'</default></row>
+<row name="email" null="1" autoincrement="0">
+<datatype>VARCHAR(50)</datatype>
+<default>NULL</default></row>
+<row name="phone" null="1" autoincrement="0">
+<datatype>VARCHAR(11)</datatype>
+<default>NULL</default></row>
+<row name="dateCreated" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<row name="pictureID" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Picture" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="316" y="11" name="Transaction">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="employeeId" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Employee" row="id" />
+</row>
+<row name="pointOfContactId" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="PointOfContact" row="id" />
+</row>
+<row name="date" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<row name="followUpReq" null="0" autoincrement="0">
+<datatype>bit(1)</datatype>
+<default>0</default></row>
+<row name="type" null="1" autoincrement="0">
+<datatype>CHAR(1)</datatype>
+<default>NULL</default><comment>I = inquiry ; S = Sale</comment>
+</row>
+<row name="resultInSale" null="1" autoincrement="0">
+<datatype>bit(1)</datatype>
+<default>0</default></row>
+<row name="notes" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="followUpTransID" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>For interactions with clients</comment>
+</table>
+<table x="66" y="381" name="Location">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="city" null="1" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>NULL</default></row>
+<row name="state" null="1" autoincrement="0">
+<datatype>VARCHAR(2)</datatype>
+<default>NULL</default></row>
+<row name="zip" null="1" autoincrement="0">
+<datatype>VARCHAR(5)</datatype>
+<default>NULL</default></row>
+<row name="streetAddr1" null="1" autoincrement="0">
+<datatype>VARCHAR(50)</datatype>
+<default>NULL</default></row>
+<row name="streetAddr2" null="1" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>Locations we have across the US</comment>
+</table>
+<table x="514" y="311" name="Picture">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="size" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="dateCreated" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<row name="mime" null="1" autoincrement="0">
+<datatype>VARCHAR(50)</datatype>
+<default>NULL</default></row>
+<row name="name" null="1" autoincrement="0">
+<datatype>VARCHAR(100)</datatype>
+<default>NULL</default></row>
+<row name="fileData" null="1" autoincrement="0">
+<datatype>BLOB</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>Table for pictures for points of contact</comment>
+</table>
+</sql>
