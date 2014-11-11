@@ -40,7 +40,8 @@
 </datatypes><table x="10" y="10" name="Employee">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="Authentication" row="empID" />
+</row>
 <row name="isAdminUser" null="1" autoincrement="0">
 <datatype>bit(1)</datatype>
 <default>0</default></row>
@@ -57,24 +58,21 @@
 <row name="dateEmployed" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
 <default>NULL</default></row>
-<row name="psswdHash" null="0" autoincrement="0">
-<datatype>VARCHAR(255)</datatype>
-<default>'NULL'</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="225" y="296" name="Uploads">
+<table x="318" y="274" name="Uploads">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="name" null="1" autoincrement="0">
 <datatype>VARCHAR(200)</datatype>
 <default>NULL</default></row>
-<row name="mime" null="0" autoincrement="0">
+<row name="mime" null="1" autoincrement="0">
 <datatype>VARCHAR(50)</datatype>
-<default>'NULL'</default></row>
-<row name="size" null="0" autoincrement="0">
+<default>NULL</default></row>
+<row name="size" null="1" autoincrement="0">
 <datatype>BIGINT</datatype>
 <default>0</default></row>
 <row name="fileData" null="1" autoincrement="0">
@@ -99,10 +97,10 @@
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="companyName" null="0" autoincrement="0">
+<row name="companyName" null="1" autoincrement="0">
 <datatype>VARCHAR(100)</datatype>
-<default>'NULL'</default></row>
-<row name="isIndividual" null="0" autoincrement="0">
+<default>NULL</default></row>
+<row name="isIndividual" null="1" autoincrement="0">
 <datatype>bit(1)</datatype>
 <default>0</default></row>
 <row name="dateCreated" null="1" autoincrement="0">
@@ -120,12 +118,12 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Company" row="id" />
 </row>
-<row name="fName" null="0" autoincrement="0">
+<row name="fName" null="1" autoincrement="0">
 <datatype>VARCHAR(25)</datatype>
-<default>'NULL'</default></row>
-<row name="lname" null="0" autoincrement="0">
+<default>NULL</default></row>
+<row name="lname" null="1" autoincrement="0">
 <datatype>VARCHAR(25)</datatype>
-<default>'NULL'</default></row>
+<default>NULL</default></row>
 <row name="email" null="1" autoincrement="0">
 <datatype>VARCHAR(50)</datatype>
 <default>NULL</default></row>
@@ -147,7 +145,7 @@
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="employeeId" null="1" autoincrement="0">
+<row name="employeeId" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Employee" row="id" />
 </row>
@@ -155,10 +153,10 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="PointOfContact" row="id" />
 </row>
-<row name="date" null="1" autoincrement="0">
+<row name="date" null="0" autoincrement="0">
 <datatype>DATETIME</datatype>
-<default>NULL</default></row>
-<row name="followUpReq" null="0" autoincrement="0">
+<default>'NULL'</default></row>
+<row name="followUpReq" null="1" autoincrement="0">
 <datatype>bit(1)</datatype>
 <default>0</default></row>
 <row name="type" null="1" autoincrement="0">
@@ -208,8 +206,8 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="size" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<datatype>BIGINT</datatype>
+<default>0</default></row>
 <row name="dateCreated" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
 <default>NULL</default></row>
@@ -226,5 +224,19 @@
 <part>id</part>
 </key>
 <comment>Table for pictures for points of contact</comment>
+</table>
+<table x="313" y="560" name="Authentication">
+<row name="empID" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="psswdHash" null="1" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+<default>NULL</default></row>
+<row name="userName" null="1" autoincrement="0">
+<datatype>VARCHAR(50)</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>empID</part>
+</key>
 </table>
 </sql>
