@@ -35,7 +35,7 @@ else
 	try
 	{
 		/*** prepare the select statement ***/
-		$stmt = $db->prepare("SELECT empID, psswdHash FROM authentication WHERE username = :username");
+		$stmt = $db->qeury("SELECT empID, psswdHash FROM authentication WHERE username = :username", PDO::FETCH_OBJ);
 
 		/*** bind the parameters ***/
 		$stmt->bindParam(':username', $username, PDO::PARAM_STR);
