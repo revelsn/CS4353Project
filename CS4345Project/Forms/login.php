@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	$_SESSION['pageTitle'] = 'Login';
-	include '../header.php';
+	include 'header.php';
 ?>
 	<body>
 		<h2>Login Here</h2>
