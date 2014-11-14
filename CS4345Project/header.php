@@ -35,7 +35,7 @@
 		<div class="navigation">
 	  		<ul class="nav">
 	  			<li>
-	  				<a href="#">Home</a>
+	  				<a href='<?php echo WEB_ROOT;?>index.php'>Home</a>
 	  			</li>
 	  			<li>
 	  				<a href="#">Services</a>
