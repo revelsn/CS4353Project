@@ -19,6 +19,27 @@
 .clear{
 	clear:both;
 }
+table{
+	min-width: 40%;
+	text-align:left;
+	border-collapse: collapse;
+	margin: 5px;
+}
+thead{
+	background: #800000;
+	color: #fff;
+	line-height: 24px;
+	font-size:16px;
+}
+table th, table td{
+	padding: 0 3px;
+}
+table tr{
+	line-height:20px;
+}
+.even{
+	background: rgba(0,0,0, .15);
+}
 /*NAV*/
 .navigation{
 	width:100%;

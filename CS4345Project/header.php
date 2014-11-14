@@ -38,11 +38,10 @@
 	  				<a href='<?php echo WEB_ROOT;?>index.php'>Home</a>
 	  			</li>
 	  			<li>
-	  				<a href="#">Services</a>
+	  				<a href="#">Employees</a>
 	  				<ul>
-	  					<li><a href="#">Consulting</a></li>
-	  					<li><a href="#">Sales</a></li>
-	  					<li><a href="#">Support</a></li>
+	  					<li><a href="/Forms/showEmployees.php">Employee List</a></li>
+	  					<li><a href="/Forms/editEmployee.php">Add Employee</a></li>
 	  				</ul>
 	  			</li>
 	  			<li>
