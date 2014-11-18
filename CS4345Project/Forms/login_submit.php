@@ -53,6 +53,20 @@ else
 		/*** if we do have a result, all is well ***/
 		else
 		{
+			/*** prepare the select statement ***/
+			$stmt = $db->prepare("SELECT isAdminUser FROM employee WHERE id = :id");
+			
+			/*** bind the parameters ***/
+			$stmt->bindParam(':id', $result['empID'], PDO::PARAM_INT);
+			
+			/*** execute the prepared statement ***/
+			$stmt->execute();
+			
+			/*** check for a result ***/
+			$empType = $stmt->fetch();
+			
+			$_SESSION['user_is_admin'] = $empType['isAdminUser'];
+			
 			/*** set the session user_id variable ***/
 			$_SESSION['user_id'] = $result['empID'];
 

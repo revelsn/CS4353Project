@@ -15,6 +15,7 @@
 		$employee = getEmployeeByID($_GET['empId']);
 		$employee = $employee[1];
 		$photo = getPictureByEmpID($_GET['empId']);
+		//print_r($photo);
 	}
 	$locations = getAllLocations();
 	
@@ -53,11 +54,12 @@
 					<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
 					<input name="photo" type="file" id="photo">
 					<?php 
-						if(isset($photo) && $photo['name'] > 0){
+						if(isset($photo)){
 						//	echo "<a href='viewPhoto.php?id=".$photo['id']."' target='_blank'>View Current Photo</a> <a href='deletePhoto.php?id=".$photo['id']."'>Delete Current Photo</a>";
-							echo "<img src='viewPhoto.php?id=".$photo['id']."' />";
+							echo "<img class='contactPhoto' src='viewPhoto.php?id=".$photo['id']."' />";
 						}
-					?> 
+					?>
+					<div class='clear'>&nbsp;</div> 
 				</p>
 				<p> 
 					<input type="hidden" name="form_token" value="<?php echo $form_token; ?>" />

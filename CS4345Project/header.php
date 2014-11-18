@@ -3,10 +3,9 @@
 		require("./config.php");
 	else
 		require("../config.php");
-	if(!isset($_SESSION['user_id']) && $_SESSION['redirectToLogon'] != 1)
+	if(!isset($_SESSION['user_id']) && !stristr($_SERVER["PHP_SELF"], 'login'))
 	{
-		$_SESSION['redirectToLogon'] = 1;
-		header("Location: Forms/login.php");
+		header("Location: ".WEB_ROOT."Forms/login.php");
 	}
 	else
 	{
@@ -31,7 +30,17 @@
 		<title><?php echo $_SESSION['pageTitle'];?></title>
 	</head>
 	<header id='headerTop'>
+		<?php
+			if(isset($_GET['makeItRain']) && $_GET['makeItRain'] > 0){
+				echo "<div id='headerImageLeft'><img src='".WEB_ROOT."images/1.gif' /></div>";
+			}
+		?>
 		<div id='headerImage'><a href='<?php echo WEB_ROOT;?>index.php'><img src='<?php echo WEB_ROOT;?>images/logo.png' /></a></div>
+		<?php
+			if(isset($_GET['makeItRain']) && $_GET['makeItRain'] > 0){
+				echo "<div id='headerImageRight'><img src='".WEB_ROOT."images/2.gif' /></div>";
+			}
+		?>
 		<div class="navigation">
 	  		<ul class="nav">
 	  			<li>
@@ -50,6 +59,9 @@
 	  					<li><a href="/Forms/showLocations.php">Location List</a></li>
 	  					<li><a href="/Forms/editLocation.php">Add Location</a></li>
 	  				</ul>
+	  			</li>
+	  			<li>
+	  				<a href="<?php echo WEB_ROOT?>logout.php">Logout</a>
 	  			</li>
 	  		</ul>
 	  	</div>
