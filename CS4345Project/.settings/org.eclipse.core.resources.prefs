@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 encoding//Forms/editEmployee.php=UTF-8
+encoding//Forms/editLocation.php=UTF-8
 encoding//Forms/login.php=UTF-8
 encoding//Forms/showEmployees.php=UTF-8
+encoding//Forms/showLocations.php=UTF-8

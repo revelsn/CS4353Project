@@ -4,16 +4,13 @@
 	$_SESSION['pageTitle'] = 'Add a user';
 	include "../db_conn.php";
 	include '../header.php';
-	include '../Classes/Employee.php';
+	include '../Classes/Location.php';
 	
-	//print_r($_POST);
-	//print_r($_FILES);
-	/*** first check that both the username, password and form token have been sent 
-	 * We will check the file upload in the update/insert logic of the Picture class
-	 ****/
-	if(!isset( $_POST['fName'], $_POST['lName'], $_POST['locationID'], $_POST['form_token']))
+	print_r($_POST);
+	/*** first check that both the username, password and form token have been sent ***/
+	if(!isset( $_POST['locationName'], $_POST['city'], $_POST['form_token']))
 	{
-		$message = 'Please enter a valid Name and Location';
+		$message = 'Please enter a valid location name and city';
 	}
 	/*** check the form token is valid ***/
 	elseif( $_POST['form_token'] != $_SESSION['form_token'])
@@ -23,11 +20,11 @@
 	else
 	{
 		if(isset($_GET['action']) && $_GET['action'] == 'update')
-			updateEmployee($_GET['id']);
+			updateLocation($_GET['id']);
 		else
-			insertEmployee();
+			insertLocation();
 		
-		$message = "Employee edited sucessfully!";
+		$message = "Location edited sucessfully!";
 	}
 ?>
 <body>

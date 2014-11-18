@@ -45,11 +45,10 @@
 	  				</ul>
 	  			</li>
 	  			<li>
-	  				<a href="#">About Us</a>
+	  				<a href="#">Locations</a>
 	  				<ul>
-	  					<li><a href="#">Company</a></li>
-	  					<li><a href="#">Mission</a></li>
-	  					<li><a href="#">Contact Information</a></li>
+	  					<li><a href="/Forms/showLocations.php">Location List</a></li>
+	  					<li><a href="/Forms/editLocation.php">Add Location</a></li>
 	  				</ul>
 	  			</li>
 	  		</ul>

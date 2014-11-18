@@ -18,7 +18,7 @@
 				foreach($employees as $emp){
 					$a++;
 					$rowStyle = ($a % 2 == 0) ? 'even' : 'odd';
-					echo "<tr class ='".$rowStyle."'><td>".str_replace("'", "", $emp['fName'])." ".str_replace("'", "", $emp['lName'])."</td><td>".date("F j, Y", strtotime($emp['dateEmployed']))."</td><td>".$emp['location']."</td><td> <a href='editEmployee.php?empId=".$emp['id']."'>Edit</a></td><td> <a href='deleteEmployee.php?empId=".$emp['id']."'>Delete</a></td></tr>";
+					echo "<tr class ='".$rowStyle."'><td>".str_replace("'", "", $emp['fName'])." ".str_replace("'", "", $emp['lName'])."</td><td>".date("F j, Y", strtotime($emp['dateEmployed']))."</td><td>".str_replace("'", "", $emp['location'])."</td><td> <a href='editEmployee.php?empId=".$emp['id']."'>Edit</a></td><td> <a href='deleteEmployee.php?empId=".$emp['id']."'>Delete</a></td></tr>";
 				}
 			?>
 		</table>

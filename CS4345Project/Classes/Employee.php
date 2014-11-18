@@ -1,5 +1,6 @@
 <?php
 include '../db_conn.php';
+include 'Picture.php';
 class Employee{
 	
 	public $id;
@@ -79,8 +80,9 @@ class Employee{
 	
 	function updateEmployee($id, $fName, $lName, $locID){
 		global $db;
-		echo 'call inner updateEmployee() locID = '.$locID;
 		try{
+			if(isset($_FILES['photo']['name']) && $_FILES['photo']['size'] > 0)
+				insertPicture($id);
 			$stmt = $db->prepare("UPDATE EMPLOYEE SET lname = :lName, fname = :fName, locationID = :locID WHERE id = :id");
 			$lName = $db->quote($lName);
 			$stmt->bindParam(':lName', $lName, PDO::PARAM_STR);
@@ -109,9 +111,6 @@ class Employee{
 		$stmt->execute();
 		$location = $stmt->fetch(PDO::FETCH_ASSOC);
 		$emp['location'] = $location['locationName'];
-		
-		echo "<br> in arraytobj: <br>";
-		print_r($emp);
 		
 		$this->dateEmployed = $emp['dateEmployed'];
 		$this->fName = $emp['fName'];
@@ -148,8 +147,7 @@ function insertEmployee(){
 }
 
 function updateEmployee($id){
-	echo 'call updateEmployee()';
-	$emp = $emp = new Employee('', '', '', '');
+	$emp = new Employee('', '', '', '');
 	$emp->employeeArrayToObject($id);
 	$emp->updateEmployee($id, $_POST['fName'], $_POST['lName'], $_POST['locationID']);
 }
