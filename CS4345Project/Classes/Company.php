@@ -35,14 +35,19 @@ class Company{
 		return $this->dateCreated;
 	}
 	
-	function savePointOfContact($comp){
+	function saveCompany($comp){
+		global $db;
 		try{
-			$db->execute("INSERT INTO COMPANY ('compName', 'dateCreated') VALUES ('".$this->getCompName()."', '".$this->getDateCreated()."')");
+			$stmt = $db->prepare("INSERT INTO COMPANY (compName, dateCreated) VALUES (:compName,:dateCreated)");
+			$compName = $this->getCompName();
+			$stmt->bindParam(':compName', $compname, PDO::PARAM_STR);
+			$dateCreated = $this->getDateCreated();
+			$stmt->bindParam(':dateCreated', $dateCreated, PDO::PARAM_STR);
 		}
 		catch(Exception $e)
 		{
 			/*** if we are here, something has gone wrong with the database ***/
-			$message = 'We are unable to process your request. Please try again later"';
+			echo $e;
 		}
 	}
 	
