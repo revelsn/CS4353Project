@@ -3,6 +3,7 @@
 	$_SESSION['pageTitle'] = 'Login';
 	include '../header.php';
 	include '../Classes/Employee.php';
+	
 ?>
 	<body>
 		<h2>Login Here</h2>
@@ -13,10 +14,10 @@
 					<input type="text" id="username" name="username" value="" />
 				<p> 
 					<label for="password">Password</label>
-					<input type="text" id="password" name="password" value="" />
+					<input type="password" id="password" name="password" value="" />
 				</p> 
 				<p> 
-					<input type="submit" value="→ Login" />
+					<input type="submit" value="Login" />
 				</p> 
 			</fieldset>
 		</form> 

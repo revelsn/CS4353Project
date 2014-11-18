@@ -16,6 +16,26 @@
 	width: 150px;
 	height: 150px;
 }
+#headerImageLeft{
+	position:absolute;
+	top:0;
+	left:0;
+	height: 150px;
+}
+#headerImageLeft img{
+	margin: 0 auto;
+	max-height: 150px;
+}
+#headerImageRight{
+	position:absolute;
+	top:0;
+	right:0;
+	height: 150px;
+}
+#headerImageRight img{
+	margin: 0 auto;
+	max-height: 150px;
+}
 .clear{
 	clear:both;
 }
@@ -39,6 +59,12 @@ table tr{
 }
 .even{
 	background: rgba(0,0,0, .15);
+}
+.contactPhoto{
+	max-width:150px;
+	border: 1px solid rgba(0,0,0,.6);
+	float:left;
+	margin-right: 10px;
 }
 /*NAV*/
 .navigation{

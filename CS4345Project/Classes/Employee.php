@@ -152,6 +152,15 @@ function updateEmployee($id){
 	$emp->updateEmployee($id, $_POST['fName'], $_POST['lName'], $_POST['locationID']);
 }
 
+function deleteEmployee($id){
+	global $db;
+
+	$stmt = $db->prepare('DELETE FROM EMPLOYEE WHERE id = :id');
+	$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+	$isSucessful = $stmt->execute();
+	return $isSucessful;
+}
+
 function getAllEmployees(){
 	global $db;
 	
