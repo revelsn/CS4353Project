@@ -166,7 +166,7 @@ class PointOfContact{
 	function updatePointOfContact($id){
 	$poc = new PointOfContact('', '', '', '', '', '');
 	$poc->pointOfContactArrayToObject($id);
-	$poc->updateEmployee($id, $_POST[compId], $_POST['fName'], $_POST['lName'], $_POST['email'], $_POST['phone'], $_POST['dateCreated']);
+	$poc->updatePointOfContact($id, $_POST[compId], $_POST['fName'], $_POST['lName'], $_POST['email'], $_POST['phone'], $_POST['dateCreated']);
 }
 
 	
