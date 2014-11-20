@@ -2,9 +2,9 @@
 include '../db_conn.php';
 class Company{
 	
-	private $id;
-	private $compName;
-	private $dateCreated;
+	public $id;
+	public $compName;
+	public $dateCreated;
 	
 	function __construct($compName, $dateCreated){
 		$this->setCompname($compName);
@@ -79,8 +79,9 @@ class Company{
 		$this->dateCreated = $comp['dateCreated'];
 		return $this;
 	}
+}
 	
-	function getPocByID($id){
+	function getCompanyByID($id){
 		global $db;
 		$stmt = $db->prepare('SELECT * FROM COMPANY WHERE id = :id');
 		$stmt->bindParam(':id', $id, PDO::PARAM_STR);
@@ -92,16 +93,27 @@ class Company{
 		return $tempArray;
 	}
 	
-	function insertPointOfContact(){
-		$comp = new PointOfContact($_POST['compName'],date('Y-m-d H:i:s',time()));
+	function insertCompany(){
+		$comp = new Company($_POST['compName'],date('Y-m-d H:i:s',time()));
 		print_r($comp);
-		$comp->savePointOfContact();
+		$comp->saveCompany();
 	} 
 	
-	function updatePointOfContact($id){
+	function updateCompany($id){
 		$comp = new Company('', '');
 		$comp->companyArrayToObject($id);
 		$comp->updateCompany($id, $_POST[compName], $_POST['dateCreated']);
 	}
+	
+	function getAllCompanies(){
+	global $db;
+	
+	$stmt = $db->prepare('SELECT * FROM COMPANY');
+	$stmt->execute();
+	while($comp = $stmt->fetch(PDO::FETCH_ASSOC)){
+		$companies[] = $comp;
+	}
+	return $companies;
+}
 	
 ?>
