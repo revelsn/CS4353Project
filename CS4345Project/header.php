@@ -60,6 +60,13 @@
 	  					<li><a href="<?php echo WEB_ROOT?>Forms/editLocation.php">Add Location</a></li>
 	  				</ul>
 	  			</li>
+	  			<li>
+	  				<a href="#">Transaction</a>
+	  				<ul>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/showTransaction.php">Transaction List</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>#">Add Transaction</a></li>
+	  				</ul>
+	  			</li>
 	  		</ul>
 	  		<ul class="navRight">
 	  			<li>
