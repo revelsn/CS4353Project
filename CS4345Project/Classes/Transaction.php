@@ -1,6 +1,7 @@
 <?php
 include '../db_conn.php';
-include 'Picture.php';
+include '../Classes/Employee.php';
+include '../Classes/PointOfContact.php';
 class Transaction{
 
 	private $id;
@@ -142,7 +143,86 @@ class Transaction{
 			/*** if we are here, something has gone wrong with the database ***/
 			echo '<br>'.$e;
 		}
+		
+		function transactionArrayToObject($id){
+			global $db;
+			$stmt = $db->prepare('SELECT * FROM TRANSACTION WHERE id = :id');
+			$stmt->bindParam(':id', $id, PDO::PARAM_STR);
+			$stmt->execute();
+			$tra = $stmt->fetch(PDO::FETCH_ASSOC);
+		
+			$stmt = $db->prepare('SELECT * FROM LOCATION l JOIN TRANSACTION e ON l.id = e.locationid WHERE e.id = :id');
+			$stmt->bindParam(':id', $id, PDO::PARAM_STR);
+			$stmt->execute();
+			$location = $stmt->fetch(PDO::FETCH_ASSOC);
+			$tra['location'] = $location['locationName'];
+		
+			$this->date = $tra['date'];
+			$this->followUpReq = $tra['followUpReq'];
+			$this->type = $tra['type'];
+			$this->resultInSale = $tra['resultInSale'];
+			return $this;
+		}
 	}
+	
+	function getTransactionByID($id){
+		global $db;
+		$stmt = $db->prepare('SELECT * FROM TRANSACTION WHERE id = :id');
+		$stmt->bindParam(':id', $id, PDO::PARAM_STR);
+		$stmt->execute();
+		$tra = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+		$stmt = $db->prepare('SELECT * FROM LOCATION l JOIN TRANSACTION e ON l.id = e.locationid WHERE e.id = :id');
+		$stmt->bindParam(':id', $id, PDO::PARAM_STR);
+		$stmt->execute();
+		$location = $stmt->fetch(PDO::FETCH_ASSOC);
+		$tra['location'] = $location['locationName'];
+	
+		//We will wrap in in an array so we can use the foreach on the showEmployee page
+		$tempArray['1'] = $tra;
+		return $tempArray;
+	}
+	
+	
+	function insertTransaction(){
+		$tra = new Transaction($_POST[''], $_POST['employeeId'], $_POST['pointOfContactId'], date('Y-m-d H:i:s',time()),
+		$_POST['followUpReq'], $_POST['type'], $_POST['resultInSale'], $_POST['followUpTransId']);
+		print_r($tra);
+		$tra->saveTransaction();
+	}
+	
+	function updateTransaction($id){
+		$tra = new Transaction('', '', '', '','','','','' );
+		$tra->transactionArrayToObject($id);
+		$tra->updateTrasaction($id,  $_POST['employeeId'], $_POST['pointOfContactId'], date('Y-m-d H:i:s',time()),
+		$_POST['followUpReq'], $_POST['type'], $_POST['resultInSale'], $_POST['followUpTransId']);
+	}
+	
+	function deleteTranaction($id){
+		global $db;
+	
+		$stmt = $db->prepare('DELETE FROM TRANSACTION WHERE id = :id');
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+		$isSucessful = $stmt->execute();
+		return $isSucessful;
+	}
+	
+	function getAllTranaction(){
+		global $db;
+	
+		$stmt = $db->prepare('SELECT * FROM TRANSACTION');
+		$stmt->execute();
+		while($transaction = $stmt->fetch(PDO::FETCH_ASSOC)){
+			$stmt2 = $db->prepare('SELECT * FROM EMPLOYEE l JOIN TRANSACTION e ON l.id = e.employeeid WHERE e.id = :id');
+			$stmt2->bindParam(':id', $transaction['id'], PDO::PARAM_STR);
+			$stmt2->execute();
+			$employee = $stmt2->fetch(PDO::FETCH_ASSOC);
+			$transaction['employee'] = $employee['employeeName'];
+			$transaction[] = $transaction;
+		}
+		return $transaction;
+	}
+	
 	
 	function getTransactionByID($id){
 		$db->query('SELECT * FROM TRANSACTION WHERE id = '.$id, PDO::FETCH_INTO, $emp);
