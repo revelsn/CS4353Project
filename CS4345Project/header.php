@@ -39,6 +39,7 @@
 		<?php
 			if(isset($_GET['makeItRain']) && $_GET['makeItRain'] > 0){
 				echo "<div id='headerImageRight'><img src='".WEB_ROOT."images/2.gif' /></div>";
+				echo "<audio autoplay loop><source src='".WEB_ROOT."images/JGWentworthOpera.mp3' type='audio/mp3'></audio>";
 			}
 		?>
 		<div class="navigation">
