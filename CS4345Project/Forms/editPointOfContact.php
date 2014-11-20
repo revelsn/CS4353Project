@@ -3,7 +3,6 @@
 	$_SESSION['pageTitle'] = 'Login';
 	include '../header.php';
 	include '../Classes/PointOfContact.php';
-	include '../Classes/Picture.php';
 	
 	/*** set a form token ***/
 	$form_token = md5( uniqid('auth', true) );

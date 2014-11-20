@@ -3,13 +3,13 @@ include '../db_conn.php';
 include 'Picture.php';
 class PointOfContact{
 	
-	private $id;
-	private $compId;
-	private $fName;
-	private $lName;
-	private $email;
-	private $phone;
-	private $dateCreated;
+	public $id;
+	public $compId;
+	public $fName;
+	public $lName;
+	public $email;
+	public $phone;
+	public $dateCreated;
 	
 	function __construct($compId, $fName, $lName, $email, $phone, $dateCreated){
 		$this->setCompID($compId);
@@ -145,29 +145,30 @@ class PointOfContact{
 		return $this;
 	}
 	
-	function getPocByID($id){
-		global $db;
-		$stmt = $db->prepare('SELECT * FROM POINTOFCONTACT WHERE id = :id');
-		$stmt->bindParam(':id', $id, PDO::PARAM_STR);
-		$stmt->execute();
-		$poc= $stmt->fetch(PDO::FETCH_ASSOC);
-	
-		/* We will wrap in in an array so we can use the foreach on the showEmployee page */
-		$tempArray['1'] = $poc;
-		return $tempArray;
-	}
-	
-	function insertPointOfContact(){
-		$poc = new PointOfContact($_POST['compId'],$_POST['fName'], $_POST['lName'], $_POST['email'], $_POST['phone'],date('Y-m-d H:i:s',time()));
-		print_r($poc);
-		$poc->savePointOfContact();
-	} 
-	
-	function updatePointOfContact($id){
+}
+
+function getPocByID($id){
+	global $db;
+	$stmt = $db->prepare('SELECT * FROM POINTOFCONTACT WHERE id = :id');
+	$stmt->bindParam(':id', $id, PDO::PARAM_STR);
+	$stmt->execute();
+	$poc= $stmt->fetch(PDO::FETCH_ASSOC);
+
+	/* We will wrap in in an array so we can use the foreach on the showEmployee page */
+	$tempArray['1'] = $poc;
+	return $tempArray;
+}
+
+function insertPointOfContact(){
+	$poc = new PointOfContact($_POST['compId'],$_POST['fName'], $_POST['lName'], $_POST['email'], $_POST['phone'],date('Y-m-d H:i:s',time()));
+	print_r($poc);
+	$poc->savePointOfContact();
+}
+
+function updatePointOfContact($id){
 	$poc = new PointOfContact('', '', '', '', '', '');
 	$poc->pointOfContactArrayToObject($id);
 	$poc->updatePointOfContact($id, $_POST[compId], $_POST['fName'], $_POST['lName'], $_POST['email'], $_POST['phone'], $_POST['dateCreated']);
 }
-
 	
 ?>
