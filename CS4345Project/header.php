@@ -33,11 +33,7 @@
 		<?php
 			if(isset($_GET['makeItRain']) && $_GET['makeItRain'] > 0){
 				echo "<div id='headerImageLeft'><img src='".WEB_ROOT."images/1.gif' /></div>";
-			}
-		?>
-		<div id='headerImage'><a href='<?php echo WEB_ROOT;?>index.php'><img src='<?php echo WEB_ROOT;?>images/logo.png' /></a></div>
-		<?php
-			if(isset($_GET['makeItRain']) && $_GET['makeItRain'] > 0){
+				echo "<div id='headerImage'><a href='".WEB_ROOT."index.php'><img src='".WEB_ROOT."images/logo.png' /></a></div>";
 				echo "<div id='headerImageRight'><img src='".WEB_ROOT."images/2.gif' /></div>";
 				echo "<audio autoplay loop><source src='".WEB_ROOT."images/JGWentworthOpera.mp3' type='audio/mp3'></audio>";
 			}
