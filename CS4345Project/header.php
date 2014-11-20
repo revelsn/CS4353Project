@@ -61,8 +61,16 @@
 	  				</ul>
 	  			</li>
 	  		</ul>
-	  		<div class='navItem'>Welcome <?php if(isset($_SESSION['user_name'])) echo $_SESSION['user_name']?>!</div>
-	  		<div class='navItem'><a href="<?php echo WEB_ROOT?>logout.php">Logout</a></div>
+	  		<ul class="navRight">
+	  			<li>
+	  				<div class='navItem'>Welcome <?php if(isset($_SESSION['user_name'])) echo $_SESSION['user_name']?>!</div>
+	  			</li>
+	  			<li>
+	  				<div class='navItem'><a href="<?php echo WEB_ROOT?>logout.php">Logout</a></div>
+	  			</li>
+	  		</ul>
+	  		
+	  		
 	  	</div>
 	</header>
 	<div class='clear'>&nbsp;</div>

@@ -72,7 +72,7 @@ table tr{
 	height:50px;
 	background: #800000;
 }
-.nav {
+.nav, .navRight {
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
@@ -81,31 +81,26 @@ table tr{
 	font-size:18px;
 	float:left;
 }
-
-.nav li {
+.navRight{
+	float:right;
+}
+.nav li, .navRight li {
 	float: left;
-	width: 160px;
+	min-width: 160px;
 	position: relative;
 }
-
-.nav li a {
+.navRight li{
+	text-align:right;
+	color: #fff;
+	padding-right:5px;
+}
+.nav li a, .navRight li a {
 	color: #fff;
 	display: block;
 	padding: 0 3px;
 	text-decoration: none;
 	background: #800000;
-}
-.navItem{
-	height:50px;
-	margin: 0px;
-	padding: 0px;
-	line-height:50px;
-	font-size:18px;
-	float:right;
-	color: #fff;
-}
-.navItem a{
-	color: #fff;
+	padding-left:5px;
 }
 /*=== submenu ===*/
 
@@ -130,6 +125,6 @@ table tr{
 	border-bottom: 1px solid #222;
 }
 
-.nav ul li a:hover, .nav li a:hover, .navItem a:hover {
+.nav ul li a:hover, .nav li a:hover{
 	color: #ccc;
 }
