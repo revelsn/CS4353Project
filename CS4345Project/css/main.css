@@ -95,7 +95,18 @@ table tr{
 	text-decoration: none;
 	background: #800000;
 }
-
+.navItem{
+	height:50px;
+	margin: 0px;
+	padding: 0px;
+	line-height:50px;
+	font-size:18px;
+	float:right;
+	color: #fff;
+}
+.navItem a{
+	color: #fff;
+}
 /*=== submenu ===*/
 
 .nav ul {
@@ -119,6 +130,6 @@ table tr{
 	border-bottom: 1px solid #222;
 }
 
-.nav ul li a:hover, .nav li a:hover {
+.nav ul li a:hover, .nav li a:hover, .navItem a:hover {
 	color: #ccc;
 }

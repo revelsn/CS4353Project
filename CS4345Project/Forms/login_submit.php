@@ -69,6 +69,12 @@ else
 			
 			/*** set the session user_id variable ***/
 			$_SESSION['user_id'] = $result['empID'];
+			
+			$stmt = $db->prepare('SELECT * FROM EMPLOYEE WHERE id = :id');
+			$stmt->bindParam(':id', $result['empID'], PDO::PARAM_INT);
+			$stmt->execute();
+			$empName = $stmt->fetch(PDO::FETCH_ASSOC);
+			$_SESSION['user_name'] = str_replace("'", "", $empName['fName']).' '.str_replace("'", "", $empName['lName']);
 
 			/*** tell the user we are logged in ***/
 			$message = 'You are now logged in';

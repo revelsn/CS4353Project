@@ -13,7 +13,7 @@
 	}
 	ini_set('display_errors',1);  
 	error_reporting(E_ALL);
-	
+	//print_r($_SESSION);
 	$cssIncludes = "<link rel='stylesheet' href='".WEB_ROOT."css/main.css'>";
 	
 	$scriptIncludes = "<script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
@@ -49,21 +49,20 @@
 	  			<li>
 	  				<a href="#">Employees</a>
 	  				<ul>
-	  					<li><a href="/Forms/showEmployees.php">Employee List</a></li>
-	  					<li><a href="/Forms/editEmployee.php">Add Employee</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/showEmployees.php">Employee List</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/editEmployee.php">Add Employee</a></li>
 	  				</ul>
 	  			</li>
 	  			<li>
 	  				<a href="#">Locations</a>
 	  				<ul>
-	  					<li><a href="/Forms/showLocations.php">Location List</a></li>
-	  					<li><a href="/Forms/editLocation.php">Add Location</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/showLocations.php">Location List</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/editLocation.php">Add Location</a></li>
 	  				</ul>
 	  			</li>
-	  			<li>
-	  				<a href="<?php echo WEB_ROOT?>logout.php">Logout</a>
-	  			</li>
 	  		</ul>
+	  		<div class='navItem'>Welcome <?php if(isset($_SESSION['user_name'])) echo $_SESSION['user_name']?>!</div>
+	  		<div class='navItem'><a href="<?php echo WEB_ROOT?>logout.php">Logout</a></div>
 	  	</div>
 	</header>
 	<div class='clear'>&nbsp;</div>

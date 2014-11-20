@@ -70,6 +70,27 @@ class Employee{
 			$date = $this->getDateEmployed();
 			$stmt->bindParam(':date', $date, PDO::PARAM_STR);
 			$stmt->execute();
+			
+			//Add user to authentication table
+			
+			$stmt = $db->prepare('SELECT * FROM EMPLOYEE WHERE lName = :lName AND fName = :fName AND dateEmployed = :dateEmployed');
+			$lName = $this->getLname();
+			$stmt->bindParam(':lName', $lName, PDO::PARAM_STR);
+			$fName = $this->getFname();
+			$stmt->bindParam(':fName', $fName, PDO::PARAM_STR);
+			$date = $this->getDateEmployed();
+			$stmt->bindParam(':dateEmployed', $date, PDO::PARAM_STR);
+			$stmt->execute();
+			$emp = $stmt->fetch(PDO::FETCH_ASSOC);
+			$password = password_hash(strtolower($this->getFname()), PASSWORD_DEFAULT);
+			$userName = strtolower($fName).'.'.strtolower($lName).'.'.$emp['id'];
+			
+			/*** prepare the insert ***/
+			$stmt = $db->prepare("INSERT INTO authentication (userName, psswdHash, empID ) VALUES (:username, :password, :empID )");
+			$stmt->bindParam(':username', $userName, PDO::PARAM_STR);
+			$stmt->bindParam(':password', $password, PDO::PARAM_STR);
+			$stmt->bindParam(':empID', $emp['id'], PDO::PARAM_STR);
+			$stmt->execute();
 		}
 		catch(Exception $e)
 		{
@@ -142,7 +163,6 @@ function getEmployeeByID($id){
 
 function insertEmployee(){
 	$emp = new Employee($_POST['lName'], $_POST['fName'], $_POST['locationID'], date('Y-m-d H:i:s',time()));
-	print_r($emp);
 	$emp->saveEmployee();
 }
 
@@ -158,7 +178,12 @@ function deleteEmployee($id){
 	$stmt = $db->prepare('DELETE FROM EMPLOYEE WHERE id = :id');
 	$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 	$isSucessful = $stmt->execute();
-	return $isSucessful;
+	
+	$stmt = $db->prepare('DELETE FROM AUTHENTICATION WHERE empID = :id');
+	$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+	$isSucessful2 = $stmt->execute();
+	
+	return ($isSucessful && $isSucessful2);
 }
 
 function getAllEmployees(){
