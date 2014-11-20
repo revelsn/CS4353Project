@@ -106,7 +106,7 @@ class PointOfContact{
 		try{
 			if(isset($_FILES['photo']['name']) && $_FILES['photo']['size'] > 0)
 				insertPicture(null,$id);
-			$stmt = $db->prepare("UPDATE POINTOFCONTACT SET lName = :compId, fName = :fName, lName = :lName, email = :email, phone = :phone, dateCreated = dateCreated WHERE id = :id");
+			$stmt = $db->prepare("UPDATE POINTOFCONTACT SET compId = :compId, lName = :lName, fName = :fName, lName = :lName, email = :email, phone = :phone, dateCreated = dateCreated WHERE id = :id");
 			$compId = $db->quote($compId);
 			$stmt->bindParam(':compId', $compId, PDO::PARAM_STR);
 			$fName = $db->quote($fName);
