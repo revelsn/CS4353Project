@@ -33,7 +33,7 @@
 		<?php
 			if(isset($_GET['makeItRain']) && $_GET['makeItRain'] > 0){
 				echo "<div id='headerImageLeft'><img src='".WEB_ROOT."images/1.gif' /></div>";
-				echo "<div id='headerImage'><a href='".WEB_ROOT."index.php'><img src='".WEB_ROOT."images/logo.png' /></a></div>";
+				echo "<div id='headerImage'><a href='".WEB_ROOT."index.php'><img src='".WEB_ROOT."images/makeItRain.jpg' /></a></div>";
 				echo "<div id='headerImageRight'><img src='".WEB_ROOT."images/2.gif' /></div>";
 				echo "<audio autoplay loop><source src='".WEB_ROOT."images/JGWentworthOpera.mp3' type='audio/mp3'></audio>";
 			}
@@ -48,13 +48,14 @@
 	  				<ul>
 	  					<li><a href="<?php echo WEB_ROOT?>Forms/showEmployees.php">Employee List</a></li>
 	  					<li><a href="<?php echo WEB_ROOT?>Forms/editEmployee.php">Add Employee</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/showLocations.php">Location List</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/editLocation.php">Add Location</a></li>
 	  				</ul>
 	  			</li>
 	  			<li>
-	  				<a href="#">Locations</a>
+	  				<a href="#">Companies</a>
 	  				<ul>
-	  					<li><a href="<?php echo WEB_ROOT?>Forms/showLocations.php">Location List</a></li>
-	  					<li><a href="<?php echo WEB_ROOT?>Forms/editLocation.php">Add Location</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/showCompanies.php">Company List</a></li>
 	  				</ul>
 	  			</li>
 	  			<li>

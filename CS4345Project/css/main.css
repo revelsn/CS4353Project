@@ -66,6 +66,11 @@ table tr{
 	float:left;
 	margin-right: 10px;
 }
+.smallImage{
+	height:20px;
+	width:20px;
+	text-align:center;
+}
 /*NAV*/
 .navigation{
 	width:100%;
