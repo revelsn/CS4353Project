@@ -4,15 +4,15 @@ include 'Picture.php';
 class PointOfContact{
 	
 	public $id;
-	public $compId;
+	public $companyID;
 	public $fName;
 	public $lName;
 	public $email;
 	public $phone;
 	public $dateCreated;
 	
-	function __construct($compId, $fName, $lName, $email, $phone, $dateCreated){
-		$this->setCompID($compId);
+	function __construct($companyID, $fName, $lName, $email, $phone, $dateCreated){
+		$this->setCompID($companyID);
 		$this->setFname($fName);
 		$this->setLname($lName);
 		$this->setEmail($email);
@@ -24,8 +24,8 @@ class PointOfContact{
 		$this->id = $id;
 	}
 	
-	function setCompID($compId){
-		$this->compId = $compId;
+	function setCompID($companyID){
+		$this->companyID = $companyID;
 	}
 	
 	function setFname($fName){
@@ -53,7 +53,7 @@ class PointOfContact{
 	}
 	
 	function getCompID(){
-		return $this->compId;
+		return $this->companyID;
 	}
 	
 	function getFname(){
@@ -79,18 +79,18 @@ class PointOfContact{
 	function savePointOfContact(){
 		global $db;
 		try{
-			$stmt = $db->prepare("INSERT INTO POINTOFCONTACT (compId, fName, lName, email, phone, dateCreated) VALUES (:compId, :fName, :lName, :email, :phone, :dateEmployed)");
-			$compId = $this->getCompID();
-			$stmt->bindParam(':compId', $compId, PDO::PARAM_STR);
-			$compId = $this->getFname();
+			$stmt = $db->prepare("INSERT INTO POINTOFCONTACT (companyID, fName, lName, email, phone, dateCreated) VALUES (:companyID, :fName, :lName, :email, :phone, :dateCreated)");
+			$companyID = $this->getCompID();
+			$stmt->bindParam(':companyID', $companyID, PDO::PARAM_STR);
+			$fName = $this->getFname();
 			$stmt->bindParam(':fName', $fName, PDO::PARAM_STR);
-			$compId = $this->getLname();
+			$lName = $this->getLname();
 			$stmt->bindParam(':lName', $lName, PDO::PARAM_STR);
-			$compId = $this->getEmail();
+			$email = $this->getEmail();
 			$stmt->bindParam(':email', $email, PDO::PARAM_STR);
-			$compId = $this->getPhone();
+			$phone = $this->getPhone();
 			$stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
-			$compId = $this->getDateCreated();
+			$dateCreated = $this->getDateCreated();
 			$stmt->bindParam(':dateCreated', $dateCreated, PDO::PARAM_STR);
 			$stmt->execute();
 		}
@@ -100,15 +100,15 @@ class PointOfContact{
 			echo $e;
 		}
 	}
-	
-	function updatePointOfContact($id, $compId, $fName, $lName, $email, $phone, $dateCreated){
+
+	function updatePointOfContact($id, $companyID, $fName, $lName, $email, $phone){
 		global $db;
 		try{
 			if(isset($_FILES['photo']['name']) && $_FILES['photo']['size'] > 0)
 				insertPicture(null,$id);
-			$stmt = $db->prepare("UPDATE POINTOFCONTACT SET compId = :compId, lName = :lName, fName = :fName, lName = :lName, email = :email, phone = :phone, dateCreated = :dateCreated WHERE id = :id");
-			$compId = $db->quote($compId);
-			$stmt->bindParam(':compId', $compId, PDO::PARAM_STR);
+			$stmt = $db->prepare("UPDATE POINTOFCONTACT SET companyID = :companyID, lName = :lName, fName = :fName, lName = :lName, email = :email, phone = :phone WHERE id = :id");
+			$compId = $db->quote($companyID);
+			$stmt->bindParam(':companyID', $companyID, PDO::PARAM_INT);
 			$fName = $db->quote($fName);
 			$stmt->bindParam(':fName', $fName, PDO::PARAM_STR);
 			$lName = $db->quote($lName);
@@ -117,9 +117,7 @@ class PointOfContact{
 			$stmt->bindParam(':email', $email, PDO::PARAM_STR);
 			$phone = $db->quote($phone);
 			$stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
-			$dateCreated = $db->quote($dateCreated);
-			$stmt->bindParam(':dateCreated', $dateCreated, PDO::PARAM_STR);
-			$stmt->bindParam(':id', $id, PDO::PARAM_STR);
+			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 			$stmt->execute();
 		}
 		catch(Exception $e)
@@ -134,9 +132,9 @@ class PointOfContact{
 		$stmt = $db->prepare('SELECT * FROM POINTOFCONTACT WHERE id = :id');
 		$stmt->bindParam(':id', $id, PDO::PARAM_STR);
 		$stmt->execute();
-		$emp = $stmt->fetch(PDO::FETCH_ASSOC);
+		$poc = $stmt->fetch(PDO::FETCH_ASSOC);
 		
-		$this->compId = $poc['compId'];
+		$this->companyID = $poc['companyID'];
 		$this->dateCreated = $poc['dateCreated'];
 		$this->fName = $poc['fName'];
 		$this->lName = $poc['lName'];
@@ -160,15 +158,44 @@ function getPocByID($id){
 }
 
 function insertPointOfContact(){
-	$poc = new PointOfContact($_POST['compId'],$_POST['fName'], $_POST['lName'], $_POST['email'], $_POST['phone'],date('Y-m-d H:i:s',time()));
-	print_r($poc);
+	$poc = new PointOfContact($_POST['companyID'],$_POST['fName'], $_POST['lName'], $_POST['email'], $_POST['phone'],date('Y-m-d H:i:s',time()));
+	//print_r($poc);
 	$poc->savePointOfContact();
 }
 
 function updatePointOfContact($id){
 	$poc = new PointOfContact('', '', '', '', '', '');
 	$poc->pointOfContactArrayToObject($id);
-	$poc->updatePointOfContact($id, $_POST[compId], $_POST['fName'], $_POST['lName'], $_POST['email'], $_POST['phone'], $_POST['dateCreated']);
+	$poc->updatePointOfContact($id, $_POST['companyID'], $_POST['fName'], $_POST['lName'], $_POST['email'], $_POST['phone']);
+}
+
+function deletePointOfContact($id){
+	global $db;
+
+	$stmt = $db->prepare('DELETE FROM POINTOFCONTACT WHERE id = :id');
+	$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+	$isSucessful = $stmt->execute();
+
+	return $isSucessful;
 }
 	
+function getAllPointsOfContact(){
+	global $db;
+
+	$stmt = $db->prepare('SELECT * FROM POINTOFCONTACT');
+	$stmt->execute();
+	while($cont = $stmt->fetch(PDO::FETCH_ASSOC)){
+		//print_r($cont);
+		$stmt2 = $db->prepare('SELECT * FROM COMPANY c JOIN POINTOFCONTACT p ON c.id = p.companyID WHERE c.id = :id');
+		$stmt2->bindParam(':id', $cont['companyID'], PDO::PARAM_STR);
+		$stmt2->execute();
+		$company = $stmt2->fetch(PDO::FETCH_ASSOC);
+		//print_r($company);
+		$cont['companyName'] = $company['companyName'];
+		$cont['isIndividual'] = $company['isIndividual'];
+		$contacts[] = $cont;
+	}
+	return $contacts;
+}
+
 ?>

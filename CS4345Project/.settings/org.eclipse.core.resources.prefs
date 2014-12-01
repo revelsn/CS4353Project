@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//Forms/deleteCompany.php=UTF-8
 encoding//Forms/deleteEmployee.php=UTF-8
+encoding//Forms/deletePOC.php=UTF-8
 encoding//Forms/editCompany.php=UTF-8
 encoding//Forms/editEmployee.php=UTF-8
 encoding//Forms/editLocation.php=UTF-8
@@ -8,3 +9,4 @@ encoding//Forms/login.php=UTF-8
 encoding//Forms/showCompanies.php=UTF-8
 encoding//Forms/showEmployees.php=UTF-8
 encoding//Forms/showLocations.php=UTF-8
+encoding//Forms/showPOC.php=UTF-8

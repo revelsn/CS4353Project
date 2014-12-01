@@ -44,25 +44,33 @@
 	  				<a href='<?php echo WEB_ROOT;?>index.php'>Home</a>
 	  			</li>
 	  			<li>
-	  				<a href="#">Employees</a>
+	  				<a href="#">Transactions</a>
 	  				<ul>
-	  					<li><a href="<?php echo WEB_ROOT?>Forms/showEmployees.php">Employee List</a></li>
-	  					<li><a href="<?php echo WEB_ROOT?>Forms/editEmployee.php">Add Employee</a></li>
-	  					<li><a href="<?php echo WEB_ROOT?>Forms/showLocations.php">Location List</a></li>
-	  					<li><a href="<?php echo WEB_ROOT?>Forms/editLocation.php">Add Location</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/showTransaction.php">Transaction List</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/editTransaction.php">Add Transaction</a></li>
+	  				</ul>
+	  			</li>
+	  			<li>
+	  				<a href="#">Points of Contact</a>
+	  				<ul>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/showPOC.php">POC List</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/editPOC.php">Add POC</a></li>
 	  				</ul>
 	  			</li>
 	  			<li>
 	  				<a href="#">Companies</a>
 	  				<ul>
 	  					<li><a href="<?php echo WEB_ROOT?>Forms/showCompanies.php">Company List</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/editCompany.php">Add Company</a></li>
 	  				</ul>
 	  			</li>
 	  			<li>
-	  				<a href="#">Transaction</a>
+	  				<a href="#">Employees</a>
 	  				<ul>
-	  					<li><a href="<?php echo WEB_ROOT?>Forms/showTransaction.php">Transaction List</a></li>
-	  					<li><a href="<?php echo WEB_ROOT?>Forms/editTransaction.php">Add Transaction</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/showEmployees.php">Employee List</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/editEmployee.php">Add Employee</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/showLocations.php">Location List</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/editLocation.php">Add Location</a></li>
 	  				</ul>
 	  			</li>
 	  		</ul>

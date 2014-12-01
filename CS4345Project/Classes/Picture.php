@@ -68,7 +68,7 @@ function insertPicture($empID = null, $contID = null){
 
 function getPictureByEmpID($id){
 	global $db;
-	$stmt = $db->prepare('SELECT * FROM PICTURE WHERE empID = :id ORDER BY dateCreated');
+	$stmt = $db->prepare('SELECT * FROM PICTURE WHERE empID = :id ORDER BY dateCreated DESC');
 	$stmt->bindParam(':id', $id, PDO::PARAM_STR);
 	$stmt->execute();
 	$photo = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -77,7 +77,7 @@ function getPictureByEmpID($id){
 
 function getPictureByPOCID($id){
 	global $db;
-	$stmt = $db->prepare('SELECT * FROM PICTURE WHERE contID = :id ORDER BY dateCreated');
+	$stmt = $db->prepare('SELECT * FROM PICTURE WHERE contID = :id ORDER BY dateCreated DESC');
 	$stmt->bindParam(':id', $id, PDO::PARAM_STR);
 	$stmt->execute();
 	$photo = $stmt->fetch(PDO::FETCH_ASSOC);

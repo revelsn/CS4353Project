@@ -6,7 +6,7 @@
 	include '../header.php';
 	include '../Classes/Company.php';
 	
-	print_r($_POST);
+	//print_r($_POST);
 	//print_r($_FILES);
 	/*** first check that both the username, password and form token have been sent 
 	 * We will check the file upload in the update/insert logic of the Picture class
@@ -27,7 +27,12 @@
 		else
 			insertCompany();
 		
-		$message = "Employee edited sucessfully!";
+		$message = "Company edited sucessfully!";
+	}
+	
+	if($_POST['isIndividual'] == 'true' && $_GET['action'] != 'update'){
+		header("Location: ".WEB_ROOT."Forms/editPointOfContact.php?fromCompany=".$_POST['companyName']);
+	
 	}
 ?>
 <body>

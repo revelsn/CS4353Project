@@ -6,14 +6,14 @@
 	
 	$companies = getAllCompanies();
 	
-	print_r($companies);
+	//print_r($companies);
 ?>
 	<body>
 		<h2>Companies</h2>
 		<div><a href='editCompany.php'>Add an Company</a></div>
 		<table>
 			<thead>
-				<tr><th>Compnay Name</th><th>Date</th><th>Is Individual</th><th>Edit</th>
+				<tr><th>Company Name</th><th>Date</th><th>Is Individual</th><th>Edit</th>
 				<?php
 					if($_SESSION['user_is_admin'] == 1)
 						echo "<th>Delete</th>";

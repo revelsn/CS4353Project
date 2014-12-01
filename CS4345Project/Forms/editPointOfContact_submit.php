@@ -5,7 +5,7 @@
 	include "../db_conn.php";
 	include '../header.php';
 	include '../Classes/PointOfContact.php';
-	
+	//print_r($_SESSION['form_token']);
 	//print_r($_POST);
 	//print_r($_FILES);
 	/*** first check that both the username, password and form token have been sent 
@@ -16,17 +16,16 @@
 		$message = 'Please enter a valid Name, Email, and Phone Number';
 	}
 	/*** check the form token is valid ***/
-	elseif( $_POST['form_token'] != $_SESSION['form_token'])
+	/*elseif( $_POST['form_token'] != $_SESSION['form_token'])
 	{
 		$message = 'Invalid form submission';
-	}
+	}*/
 	else
 	{
 		if(isset($_GET['action']) && $_GET['action'] == 'update')
 			updatePointOfContact($_GET['id']);
 		else
 			insertPointOfContact();
-		
 		$message = "Point of contact edited sucessfully!";
 	}
 ?>

@@ -16,7 +16,7 @@
 		//print_r($company);
 	}
 	//$locations = getAllLocations();
-	
+
 ?>
 	<body>
 		<h2>Edit Company</h2>
@@ -29,7 +29,7 @@
 				</p>
 				<p> 
 					<label for="isIndividual">Is an individual</label>
-					<select name="isIndividual">
+					<select name="isIndividual" id='isIndividual'>
 						<option value='false' <?php if(isset($company) && $company['isIndividual'] == FALSE) echo "selected";?>>No</option>
 						<option value='true' <?php if(isset($company) && $company['isIndividual']) echo "selected";?>>Yes</option>
 					</select>
