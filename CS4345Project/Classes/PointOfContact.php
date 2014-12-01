@@ -1,6 +1,6 @@
 <?php
 include '../db_conn.php';
-include 'Picture.php';
+include_once 'Picture.php';
 class PointOfContact{
 	
 	public $id;

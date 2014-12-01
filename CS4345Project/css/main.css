@@ -45,6 +45,9 @@ table{
 	border-collapse: collapse;
 	margin: 5px;
 }
+table.full{
+	width:98%;
+}
 thead{
 	background: #800000;
 	color: #fff;

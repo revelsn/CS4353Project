@@ -6,13 +6,13 @@
 	include '../header.php';
 	include '../Classes/Transaction.php';
 	
-	//print_r($_POST);
+	print_r($_POST);
 	//print_r($_FILES);
 	/*** first check that both the username, password and form token have been sent 
 	 * We will check the file upload in the update/insert logic of the Picture class
 	 ****/
-	if(!isset( $_POST['employeeId'], $_POST['pointOfContactId'], $_POST['date'], $_POST['followUpReq'], $_POST['type'],
-			 $_POST['resultInSale'], $_POST['followUpTransId'], $_POST['form_token']))
+	if(!isset( $_POST['employeeID'], $_POST['pointOfContactId'], $_POST['date'], $_POST['followUpReq'], $_POST['type'],
+			 $_POST['resultInSale'], $_POST['form_token']))
 	{
 		$message = 'Please enter a valid Name and Location';
 	}
