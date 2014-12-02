@@ -144,6 +144,15 @@ function getAllCompanies(){
 	$stmt = $db->prepare('SELECT * FROM COMPANY');
 	$stmt->execute();
 	while($comp = $stmt->fetch(PDO::FETCH_ASSOC)){
+		if($comp['isIndividual']){
+			$stmt2 = $db->prepare('SELECT * FROM POINTOFCONTACT p JOIN COMPANY c ON c.id = p.companyID WHERE c.id = :id');
+			$stmt2->bindParam(':id', $comp['id'], PDO::PARAM_STR);
+			$stmt2->execute();
+			$poc = $stmt2->fetch(PDO::FETCH_ASSOC);
+			//print_r($poc);
+			$comp['indvName'] = str_replace("'", "", $poc['fName'])." ".str_replace("'", "", $poc['lName']);
+			$comp['indvID'] = $poc['id'];
+		}
 		$companies[] = $comp;
 	}
 	return $companies;

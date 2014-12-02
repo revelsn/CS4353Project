@@ -204,7 +204,11 @@ function getTransactionByID($id){
 	$stmt->bindParam(':id', $id, PDO::PARAM_STR);
 	$stmt->execute();
 	$tra = $stmt->fetch(PDO::FETCH_ASSOC);
-
+	$emp = getEmployeeByID($tra['employeeId'])[1];
+	$poc = getPocByID($tra['pointOfContactId'])[1];
+	//print_r($poc);
+	$tra['employee'] = str_replace("'", "", $emp['fName'])." ".str_replace("'", "", $emp['lName']);
+	$tra['pointOfContact'] = str_replace("'", "", $poc['fName'])." ".str_replace("'", "", $poc['lName']);
 	//We will wrap in in an array so we can use the foreach on the showTransaction page
 	$tempArray['1'] = $tra;
 	return $tempArray;

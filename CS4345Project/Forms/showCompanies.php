@@ -35,6 +35,14 @@
 					if($_SESSION['user_is_admin'] == 1)
 						echo "<td> <a href='deleteCompany.php?id=".$comp['id']."'>Delete</a></td>";
 					echo "</tr>";
+					if($comp['isIndividual']){
+						echo "<tr class ='".$rowStyle." subRow'><td colspan='3' class='indvName'>Individual's name: ".$comp['indvName']."</td><td colspan='";
+						if($_SESSION['user_is_admin'] == 1)
+							echo '3';
+						else
+							echo '2';
+						echo "'><a href='editPointOfContact.php?id=".$comp['indvID']."'>Edit</a></td></tr>";
+					}
 				}
 			?>
 		</table>

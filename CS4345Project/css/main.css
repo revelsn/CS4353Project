@@ -60,8 +60,22 @@ table th, table td{
 table tr{
 	line-height:20px;
 }
+.subRow{
+	background: rgba(0,0,0,.10);
+	font-size:13px;
+}
+.subRow .indvName{
+	text-align:right;
+}
 .even{
 	background: rgba(0,0,0, .15);
+}
+.label{
+	font-weight:bold;
+	padding-right: 5px;
+}
+.transactionItem{
+	padding: 5px;
 }
 .contactPhoto{
 	max-width:150px;
