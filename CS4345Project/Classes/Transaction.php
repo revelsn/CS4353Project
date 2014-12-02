@@ -183,13 +183,7 @@ class Transaction{
 		$stmt->bindParam(':id', $id, PDO::PARAM_STR);
 		$stmt->execute();
 		$tra = $stmt->fetch(PDO::FETCH_ASSOC);
-	
-		$stmt = $db->prepare('SELECT * FROM LOCATION l JOIN TRANSACTION e ON l.id = e.locationid WHERE e.id = :id');
-		$stmt->bindParam(':id', $id, PDO::PARAM_STR);
-		$stmt->execute();
-		$location = $stmt->fetch(PDO::FETCH_ASSOC);
-		$tra['location'] = $location['locationName'];
-	
+
 		$this->date = $tra['date'];
 		$this->followUpReq = $tra['followUpReq'];
 		$this->type = $tra['type'];
@@ -258,10 +252,49 @@ function deleteTranaction($id){
 	return $isSucessful;
 }
 
-function getAllTransactions(){
+function getAllTransactions($whereClauses = null){
 	global $db;
+	
+	if($whereClauses != null){
+		$where = ' WHERE';
+		$count = 0;
+		if(isset($whereClauses['employeeID']) && $whereClauses['employeeID'] > 0){
+			$where .= ' employeeId = '.$whereClauses['employeeID'];
+			$count++;
+		}
+		if(isset($whereClauses['pointOfContactId']) && $whereClauses['pointOfContactId'] > 0){
+			if($count > 0 )
+				$where .=' AND';
+			$where .= ' pointOfContactId = '.$whereClauses['pointOfContactId'];
+			$count++;
+		}
+		if(isset($whereClauses['followUpReq']) && $whereClauses['followUpReq'] =='true'){
+			if($count > 0 )
+				$where .=' AND';
+			$where .= ' followUpReq = 1';
+			$count++;
+		}
+		if(isset($whereClauses['resultInSale']) && $whereClauses['resultInSale'] =='true'){
+			if($count > 0 )
+				$where .=' AND';
+			$where .= ' resultInSale = 1';
+			$count++;
+		}
+		if(isset($whereClauses['type']) && $whereClauses['type'] > ''){
+			if($count > 0 )
+				$where .=' AND';
+			$where .= " type = '".$whereClauses['type']."'";
+			$count++;
+		}
+	}
+	else
+		$where = '';
+	
+	$sql = 'SELECT * FROM TRANSACTION'.$where;
+	
+	//print_r($sql);
 
-	$stmt = $db->prepare('SELECT * FROM TRANSACTION');
+	$stmt = $db->prepare($sql);
 	$stmt->execute();
 	while($transaction = $stmt->fetch(PDO::FETCH_ASSOC)){
 		$emp = getEmployeeByID($transaction['employeeId'])[1];
@@ -271,7 +304,10 @@ function getAllTransactions(){
 		$transaction['pointOfContact'] = str_replace("'", "", $poc['fName'])." ".str_replace("'", "", $poc['lName']);
 		$transactions[] = $transaction;
 	}
-	return $transactions;
+	if (isset($transactions) && count($transactions) > 0)
+		return $transactions;
+	else
+		return null;
 }
 
 
