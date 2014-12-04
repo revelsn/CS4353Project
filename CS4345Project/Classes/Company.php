@@ -114,7 +114,7 @@ function insertCompany(){
 	else
 		$isInv = 0;
 	$comp = new Company($_POST['companyName'],date('Y-m-d H:i:s',time()), $isInv);
-	print_r($comp);
+	//print_r($comp);
 	$comp->saveCompany();
 } 
 

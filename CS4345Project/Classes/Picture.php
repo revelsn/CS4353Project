@@ -92,4 +92,13 @@ function getPictureByID($id){
 	$photo = $stmt->fetch(PDO::FETCH_ASSOC);
 	return $photo;
 }
+function deletePictureByPOCID($id){
+	global $db;
+
+	$stmt = $db->prepare('DELETE FROM PICTURE WHERE contID = :id');
+	$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+	$isSucessful = $stmt->execute();
+
+	return $isSucessful;
+}
 ?>

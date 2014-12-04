@@ -6,7 +6,7 @@
 	include '../header.php';
 	include '../Classes/Transaction.php';
 	
-	print_r($_POST);
+	//print_r($_POST);
 	//print_r($_FILES);
 	/*** first check that both the username, password and form token have been sent 
 	 * We will check the file upload in the update/insert logic of the Picture class

@@ -10,10 +10,10 @@
 	if(isset($_GET['id'])){
 		$transaction = getTransactionByID($_GET['id']);
 		$transaction = $transaction[1];
-		//$uploads = getUploadsByTransID($_GET['id']);
+		$uploads = getUploadsByTransID($_GET['id']);
 		
 	}
-	print_r($transaction);
+	//print_r($transaction);
 	/*** set the session form token ***/
 	$_SESSION['form_token'] = $form_token;
 	$employees = getAllEmployees();
@@ -136,10 +136,12 @@
 					<?php 
 						if(isset($uploads)){
 							foreach($uploads as $upload)
-								echo "<a href='viewUpload.php?id=".$upload['id']."' />";
+								echo "<br /><a href='viewUpload.php?id=".$upload['id']."'>View ".$upload['name']."</a>";
 						}
 					?>
 					<div class='clear'>&nbsp;</div> 
+					<label for="fileDescription">Description</label>
+					<textarea rows="4" cols="50" name='fileDescription'></textarea>
 				</p>
 				<p> 
 					<input type="hidden" name="form_token" value="<?php echo $form_token; ?>" />

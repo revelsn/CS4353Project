@@ -15,7 +15,7 @@
 		$poc = getPocByID($_GET['id']);
 		$poc = $poc[1];
 		$photo = getPictureByPOCID($_GET['id']);
-		//print_r($photo);
+		//print_r($poc);
 	}
 	$companies = getAllCompanies();
 	

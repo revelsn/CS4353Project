@@ -131,7 +131,7 @@
 							echo "<td><img src='".WEB_ROOT."images/checkmark.png' class='smallImage'></td>";
 						else
 							echo "<td><img src='".WEB_ROOT."images/x.png' class='smallImage'></td>";
-						if($tra['resultInSale'])
+						if($tra['resultInSale']){
 							switch($tra['type']){
 								case 'S':
 									echo "<td>Stocks</td>";
@@ -146,10 +146,11 @@
 									echo "<td>Cash</td>";
 									break;
 							}
+						}
 						else
 							echo "<td>Inquiry</td>";
 						
-						if($tra['followUpTransID'] > 0)
+						if(isset($tra['followUpTransID']) && $tra['followUpTransID'] > 0)
 							echo "<td><a href='viewTransaction.php?traId=".$tra['followUpTransID']."'>View Followup</a></td>";
 						else
 							echo "<td>-</td>";
@@ -158,7 +159,7 @@
 						echo "<td> <a href='viewTransaction.php?id=".$tra['id']."'>View</a></td>";
 						echo "<td> <a href='editTransaction.php?id=".$tra['id']."'>Edit</a></td>";
 						if($_SESSION['user_is_admin'] == 1)
-							echo "<td> <a href='deleteTranaction.php?id=".$tra['id']."'>Delete</a></td></tr>";
+							echo "<td> <a href='deleteTransaction.php?id=".$tra['id']."'>Delete</a></td></tr>";
 					}
 				}
 				else{

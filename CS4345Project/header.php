@@ -54,7 +54,7 @@
 	  				<a href="#">Points of Contact</a>
 	  				<ul>
 	  					<li><a href="<?php echo WEB_ROOT?>Forms/showPOC.php">POC List</a></li>
-	  					<li><a href="<?php echo WEB_ROOT?>Forms/editPOC.php">Add POC</a></li>
+	  					<li><a href="<?php echo WEB_ROOT?>Forms/editPointOfContact.php">Add POC</a></li>
 	  				</ul>
 	  			</li>
 	  			<li>

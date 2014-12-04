@@ -10,8 +10,8 @@
 	/*** set the session form token ***/
 	$_SESSION['form_token'] = $form_token;
 	
-	if(isset($_GET['empId'])){
-		$transaction = getTransactionByID($_GET['empId']);
+	if(isset($_GET['id'])){
+		$transaction = getTransactionByID($_GET['id']);
 		$transaction = $transaction[1];
 	}
 	

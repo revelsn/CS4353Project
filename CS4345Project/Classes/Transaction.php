@@ -1,7 +1,8 @@
 <?php
 include '../db_conn.php';
-include '../Classes/Employee.php';
-include '../Classes/PointOfContact.php';
+include_once '../Classes/Employee.php';
+include_once '../Classes/PointOfContact.php';
+include_once '../Classes/Upload.php';
 class Transaction{
 
 	public $id;
@@ -150,22 +151,24 @@ class Transaction{
 		}
 	}
 
-	function updateTransaction($id, $employeeID, $pointOfContactId, $date, $followUpReq, $type, $resultInSale, $followUpTransId){
+	function updateTransaction($id, $employeeID, $pointOfContactId, $date, $followUpReq, $type, $resultInSale, $followUpTransId, $previousTransactionID){
 		global $db;
 		try{
+			if(isset($_FILES['upload']['name']) && $_FILES['upload']['size'] > 0)
+				insertUpload($id, $_POST['fileDescription']);
 			$stmt = $db->prepare("UPDATE TRANSACTION SET employeeId = :employeeId, pointOfContactId = :pointOfContactId, date = :date, followUpReq = :followUpReq,
-					type = :type, resultInSale = :resultInSale, followUpTransId = :followUpTransId  WHERE id = :id");
+					type = :type, resultInSale = :resultInSale, followUpTransId = :followUpTransId, previousTransactionID = :previousTransactionID  WHERE id = :id");
 			$stmt->bindParam(':employeeId', $employeeID, PDO::PARAM_STR);
 			$stmt->bindParam(':pointOfContactId', $pointOfContactId, PDO::PARAM_STR);
 			$date = $db->quote($date);
 			$stmt->bindParam(':date', $date, PDO::PARAM_STR);
 			$followUpReq = $db->quote($followUpReq);
 			$stmt->bindParam(':followUpReq', $followUpReq, PDO::PARAM_STR);
-			$type = $db->quote($type);
 			$stmt->bindParam(':type', $type, PDO::PARAM_STR);
 			$resultInSale = $db->quote($resultInSale);
 			$stmt->bindParam(':resultInSale', $resultInSale, PDO::PARAM_STR);
-			$followUpTransId = $db->quote($followUpTransId);
+			$stmt->bindParam(':followUpTransId', $followUpTransId, PDO::PARAM_STR);
+			$stmt->bindParam(':previousTransactionID', $previousTransactionID, PDO::PARAM_STR);
 			$stmt->bindParam(':id', $id, PDO::PARAM_STR);
 			$stmt->execute();
 		}
@@ -222,7 +225,10 @@ function insertTransaction(){
 	if($_POST['followUpTrans'] == false)
 		$previousTransactionID = null;
 	else{
-		$previousTransactionID = $_POST['previousTransactionID'];
+		if(isset($_POST['previousTransactionID']) && $_POST['previousTransactionID'] > 0)
+			$previousTransactionID = $_POST['previousTransactionID'];
+		else
+			$previousTransactionID = null;
 	}
 	
 	if($_POST['followUpReq'] == 'true')
@@ -239,11 +245,33 @@ function insertTransaction(){
 function updateTransaction($id){
 	$tra = new Transaction('', '', '', '','','','','' );
 	$tra->transactionArrayToObject($id);
-	$tra->updateTrasaction($id,  $_POST['employeeId'], $_POST['pointOfContactId'], date('Y-m-d H:i:s',time()),
-	$_POST['followUpReq'], $_POST['type'], $_POST['resultInSale'], $_POST['followUpTransID']);
+	if($_POST['resultInSale'] == 'true'){
+		$resultInSale = 1;
+		$type = $_POST['type'];
+	}
+	else{
+		$resultInSale = 0;
+		$type = null;
+	}
+	
+	if($_POST['followUpTrans'] == false)
+		$previousTransactionID = null;
+	else{
+		if(isset($_POST['previousTransactionID']) && $_POST['previousTransactionID'] > 0)
+			$previousTransactionID = $_POST['previousTransactionID'];
+		else
+			$previousTransactionID = null;
+	}
+	
+	if($_POST['followUpReq'] == 'true')
+		$followUpReq = 1;
+	else
+		$followUpReq = 0;
+	$tra->updateTransaction($id,  $_POST['employeeID'], $_POST['pointOfContactId'], date('Y-m-d H:i:s',time()),
+	$followUpReq, $type, $_POST['resultInSale'], $_POST['followUpTrans'], $previousTransactionID);
 }
 
-function deleteTranaction($id){
+function deleteTransaction($id){
 	global $db;
 
 	$stmt = $db->prepare('DELETE FROM TRANSACTION WHERE id = :id');

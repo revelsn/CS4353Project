@@ -151,6 +151,12 @@ function getPocByID($id){
 	$stmt->bindParam(':id', $id, PDO::PARAM_STR);
 	$stmt->execute();
 	$poc= $stmt->fetch(PDO::FETCH_ASSOC);
+	
+	$stmt = $db->prepare('SELECT * FROM COMPANY c JOIN POINTOFCONTACT p ON c.id = p.companyID WHERE p.id = :id');
+	$stmt->bindParam(':id', $id, PDO::PARAM_STR);
+	$stmt->execute();
+	$comp = $stmt->fetch(PDO::FETCH_ASSOC);
+	$poc['companyName'] = $comp['companyName'];
 
 	/* We will wrap in in an array so we can use the foreach on the showEmployee page */
 	$tempArray['1'] = $poc;
@@ -171,12 +177,14 @@ function updatePointOfContact($id){
 
 function deletePointOfContact($id){
 	global $db;
-
+	
+	$isSucessful = deletePictureByPOCID($id);
+	
 	$stmt = $db->prepare('DELETE FROM POINTOFCONTACT WHERE id = :id');
 	$stmt->bindParam(':id', $id, PDO::PARAM_INT);
-	$isSucessful = $stmt->execute();
+	$isSucessful2 = $stmt->execute();
 
-	return $isSucessful;
+	return ($isSucessful && $isSucessful2);
 }
 	
 function getAllPointsOfContact(){
