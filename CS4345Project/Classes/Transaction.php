@@ -136,7 +136,7 @@ class Transaction{
 				$followUpReq = $this->getFollowUpReq();
 				$stmt->execute();
 				$currentTrans = $stmt->fetch(PDO::FETCH_ASSOC);
-				print_r($currentTrans);
+				//print_r($currentTrans);
 				$stmt = $db->prepare("UPDATE TRANSACTION SET followUpTransId = :followUpTransId WHERE id = :id");
 				$transToEdit = $this->getPreviousTransactionID();
 				$stmt->bindParam(':id', $transToEdit, PDO::PARAM_INT);
@@ -238,7 +238,7 @@ function insertTransaction(){
 	
 	$tra = new Transaction($_POST['employeeID'], $_POST['pointOfContactId'], date('Y-m-d H:i:s',time()),
 	$followUpReq, $type, $resultInSale, $_POST['notes'], $previousTransactionID);
-	print_r($tra);
+	//print_r($tra);
 	$tra->saveTransaction();
 }
 

@@ -28,6 +28,14 @@
 			echo $scriptIncludes;
 		?>
 		<title><?php echo $_SESSION['pageTitle'];?></title>
+		
+		<style>
+			body{
+				background: url('<?php echo WEB_ROOT;?>/images/pageBG.png') no-repeat center center;
+				min-height: 500px;
+				background-attachment: fixed;
+			}
+		</style>
 	</head>
 	<header id='headerTop'>
 		<?php
